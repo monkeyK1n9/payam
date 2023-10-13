@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS products (
+  id INT AUTO_INCREMENT NOT NULL,
+  name VARCHAR(100),
+  imageUrl LONGTEXT,
+  amount FLOAT(12),
+  currency VARCHAR(50),
+  PRIMARY KEY(id)
+);

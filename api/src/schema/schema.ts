@@ -1,30 +1,45 @@
 
 
 // Schema building
-export const typeDefs = `
+export const typeDefs = `#graphql
 
-  # Product model
-  type Product {
-    id: ID!
-    name: String!
-    imageUrl: String!
-    amount: Float
-    currency: String
-  }
+    # Product model
+    type Product {
+        id: ID
+        name: String!
+        imageUrl: String!
+        amount: Float
+        currency: String
+    }
 
-  # Query for the products
-  type Query {
-    products: [Product]
-    product(id: ID!): Product
-  }
+    input SearchName {
+        name: String!
+    }
 
-  # The mutation
-  type Mutation {
-    createProduct(id: ID!, name: String!, imageUrl: String!, amount: Float, currency: String): Product
-    deleteProduct(id: ID!): string
-    updateProduct(id: ID!, name: String!, imageUrl: String!, amount: Float, currency: String): Product
-    getProductById(id: ID!): Product
-    getProductByName(name: String!): Product
-    getProducts(): [Product]
-  }
+    input SearchId {
+        id: ID
+    }
+
+    input NewProduct {
+        id: ID
+        name: String!
+        imageUrl: String!
+        amount: Float
+        currency: String
+    }
+
+    # Query for the products
+    type Query {
+        getProducts: [Product]
+        getProductById(id: SearchId): Product
+        getProductByName(name: SearchName): Product
+    }
+
+    # The mutation
+    type Mutation {
+        createProduct(product: NewProduct!): Product
+        deleteProduct(id: SearchId): String
+        updateProduct(product: NewProduct): Product
+    }
+
 `;

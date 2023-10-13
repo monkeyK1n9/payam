@@ -7,32 +7,29 @@
 //     getProductByName(name: String!): Product
 //     getProducts(): [Product]
 //   }
-const { knex } = require('../../connection')
+import { knex } from "../../connection.js"
 
-const createProduct = (id, name, string, imageUrl, amount, currency) => {
+const getProductById = async (id) => {
+    const result = await knex.select().from('products').where("id", id);
 
+    return result;
 }
 
-const deleteProduct = (id) => {
+const getProductByName = async (name) => {
+    const result = await knex.select().from('products').where("name", name);
 
-}
-
-const updateProduct = (id, name, string, imageUrl, amount, currency) => {
-
-}
-
-const getProductById = (id) => {
-
-}
-
-const getProductByName = (name) => {
-
+    return result;
 }
 
 const getProducts = async () => {
-    const result = await knex.select().from('products')
+    const result = await knex.select().from('products');
+    return result;
 }
 
 export const productResolvers = {
-
+    Query: {
+        getProducts: async () => await getProducts(),
+        getProductById: async (parent, args, contextValue, info) => await getProductById(args.id),
+        getProductByName: async (nparent, args, contextValue, info) => await getProductByName(args.name)
+    }
 }
