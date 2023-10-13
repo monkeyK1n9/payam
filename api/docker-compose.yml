@@ -1,0 +1,32 @@
+version: "3.6"
+### get network
+### ifconfig -l | xargs -n1 ipconfig getifaddr
+services:
+  mysql:
+    image: mysql
+    platform: linux/amd64 ## For Apple M1 Chip, other platoform please remove this line
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_HOST: localhost
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+      - app_db:/var/lib/mysql
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+volumes:
+  app_db:
+
+networks:
+  nt_mysql:
+    driver: bridge
