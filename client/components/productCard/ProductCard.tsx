@@ -10,7 +10,7 @@ export default function ProductCard({item}: Props) {
         <View style={styles.container}>
             <Image
                 source={{uri: item.imageUrl}}
-                style={{flex: 1, flexGrow: 1, height: 150, width: 150}}
+                style={{flex: 1, flexGrow: 1, height: 120, width: 120, borderRadius: 10}}
                 resizeMode='contain'
             />
             <View style={styles.textView}>
@@ -31,11 +31,10 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         padding: 8,
         margin: 8,
-        width: "100%",
+        width: "80%",
         flexDirection: "row",
     },
     textView: {
-        alignItems: "center",
         flex: 1,
     },
     name: {

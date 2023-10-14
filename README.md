@@ -15,6 +15,9 @@
 ## Introduction
 This is a mobile application built with react native on the front and a graphql server backend with MySQL. The mobile app is a simple market app listing products fetched from the database.
 
+| Loading Data | Products Displayed |
+|--------------|--------------------|
+| ![Loading](client/docs/loading.jpg) | ![Products](client/docs/data.jpg) |
 ## Getting Started
 Requirement:
 1. Node
@@ -74,6 +77,16 @@ Start the server:
 ```npm
 npm run start
 ```
+Create an .env file in your client directory following:
+```.env
+EXPO_PUBLIC_GRAPHQL_URI=http://000.000.000.000:4000
+```
+If you are developing locally, the IP address will be the same generated from the backend command:
+```
+   ifconfig -l | xargs -n1 ipconfig getifaddr
+```
+
+If you have a production server, the environment variable EXPO_PUBLIC_GRAPHQL_URI will be the graphql server link.
 
 Congratulations, you can start your development journey!
 
