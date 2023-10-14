@@ -5,27 +5,35 @@ export const typeDefs = `#graphql
 
     # Product model
     type Product {
-        id: ID
-        name: String!
-        imageUrl: String!
+        id: Int
+        name: String
+        imageUrl: String
         amount: Float
         currency: String
     }
 
     input SearchName {
-        name: String!
+        name: String
     }
 
     input SearchId {
-        id: ID
+        id: Int
     }
 
     input NewProduct {
-        id: ID
-        name: String!
-        imageUrl: String!
+        id: Int
+        name: String
+        imageUrl: String
         amount: Float
         currency: String
+    }
+
+    input SearchLimit {
+        limit: Float
+    }
+
+    input SearchOffset {
+        offset: Float
     }
 
     # Query for the products
@@ -33,6 +41,7 @@ export const typeDefs = `#graphql
         getProducts: [Product]
         getProductById(id: SearchId): Product
         getProductByName(name: SearchName): Product
+        getProductsByLimitAndOffset(limit: SearchLimit, offset: SearchOffset): [Product]
     }
 
     # The mutation

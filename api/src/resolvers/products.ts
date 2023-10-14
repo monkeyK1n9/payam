@@ -1,28 +1,29 @@
-// # The mutation
-//   type Mutation {
-//     createProduct(id: ID!, name: String!, imageUrl: String!, amount: Float, currency: String): Product
-//     deleteProduct(id: ID!): string
-//     updateProduct(id: ID!, name: String!, imageUrl: String!, amount: Float, currency: String): Product
-//     getProductById(id: ID!): Product
-//     getProductByName(name: String!): Product
-//     getProducts(): [Product]
-//   }
+
 import { knex } from "../../connection.js"
 
 const getProductById = async (id) => {
-    const result = await knex.select().from('products').where("id", id);
+    const result = await knex('products').select('*').where('id', id.id);
 
     return result;
 }
 
 const getProductByName = async (name) => {
-    const result = await knex.select().from('products').where("name", name);
+    const result = await knex('products').select('*').where('name', name.name);
+
+    return result;
+}
+
+const getProductsByLimitAndOffset = async (limit, offset) => {
+    const result = await knex.select('*')
+    .from('products')
+    .limit(limit.limit)
+    .offset(offset.offset)
 
     return result;
 }
 
 const getProducts = async () => {
-    const result = await knex.select().from('products');
+    const result = await knex('products').select();
     return result;
 }
 
@@ -30,6 +31,7 @@ export const productResolvers = {
     Query: {
         getProducts: async () => await getProducts(),
         getProductById: async (parent, args, contextValue, info) => await getProductById(args.id),
-        getProductByName: async (nparent, args, contextValue, info) => await getProductByName(args.name)
+        getProductByName: async (parent, args, contextValue, info) => await getProductByName(args.name),
+        getProductsByLimitAndOffset: async (parent, args, contextValue, info) => await getProductsByLimitAndOffset(args.limit, args.offset)
     }
 }

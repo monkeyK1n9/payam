@@ -12,7 +12,7 @@ const server = new ApolloServer({
 
 const createProductsIfNotExists = () => {
     for (let i = 0; i < 500; i++) {
-        knex.insert([{name: 'Product 1', imageUrl: "https://picsum.photos/id/" + i + "/200", amount: 1000, currency: 'USD'}]).into("products")
+        knex.insert([{name: 'Product ' + i, imageUrl: "https://picsum.photos/id/" + i + "/300", amount: 1000, currency: 'USD'}]).into("products")
         .catch((err) => console.log('failed to create product: ' + err.message))
     }
 }
