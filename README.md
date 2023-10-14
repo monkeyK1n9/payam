@@ -59,6 +59,7 @@ You then need to configure [knex](https://knexjs.org/guide/#browser) to connect 
    ```.env
    IP_ADDRESS = <Generated IP Address>
    ```
+3. You can open the web-based admin dashboard, **adminer** with the generated IP address. Open your browser at **http://localhost:8080**. Your credentials to login will be the same as that in the [connection file](./api/connection.ts). If you create another user with the appropriate permissions, you can also login with that too.
 ### Frontend App
 Open the client folder
 ```$
